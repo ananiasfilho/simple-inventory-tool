@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados do Scan</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Resultados do Scan</h1>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>IP</th>
+                <th>Hostname</th>
+                <th>Status</th>
+                <th>Ping</th>
+                <th>SSH</th>
+                <th>Usuário</th>
+                <th>Senha</th>
+                <th>Chave</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr class="{% if row['status'] == 'Offline' %}offline-row{% else %}active-row{% endif %}">
+                <td>{{ row['ip'] }}</td>
+                <td>{{ row['hostname'] }}</td>
+                <td>{{ row['status'] }}</td>
+                <td>{{ row['ping'] }}</td>
+                <td>{{ row['ssh'] }}</td>
+                <td>{{ row['usuario'] }}</td>
+                <td>{{ row['senha'] }}</td>
+                <td>{{ row['chave'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
