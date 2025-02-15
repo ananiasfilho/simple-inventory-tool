@@ -3,7 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 old_versions/
-files/*.txt
 *.csv
 # C extensions
 *.so
