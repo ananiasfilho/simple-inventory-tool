@@ -8,7 +8,11 @@ _Tuba_-SMT foi desenvolvido para executar algumas atividades simples como:
 - Tem **ssh** habilitado?
 - Qual dos usuários/senha/chaves a partir de um repositório, terei acesso ssh ao Sistema Operacional deste IP?
 
-# Arquivos e Configurações
+* Linguagem: Python
+
+* Interface WEB: Flask
+
+## Arquivos e Configurações
 
 É necessário basicamente configurar o arquivo environment.cfg conforme a seguir:
 ```
@@ -85,4 +89,8 @@ cd web
 python app.py
 ```
 
+## Acessando a interface WEB - GUI
+
 Abra o navegador e veja o resultado.
+
+http://localhost:5000
