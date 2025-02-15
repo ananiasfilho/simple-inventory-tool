@@ -1,8 +1,8 @@
-# _tuba_-SMT
+# _tuba_-SIT
 
-**_tuba_ is a Simple Monitoring Tool**
+**_tuba_ is a Simple Inventory Tool**
 
-_Tuba_-SMT foi desenvolvido para executar algumas atividades simples como:
+_Tuba_-SIT foi desenvolvido para executar algumas atividades simples como:
 
 - O ip está em uso? (Online e/ou Offline)
 - Tem **ssh** habilitado?

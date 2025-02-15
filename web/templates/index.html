@@ -5,22 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados do Scan</title>
     <link rel="stylesheet" href="/static/style.css">
-    <style>
-        .header {
-            font-size: 40px;
-            text-align: center;
-            padding: 20px 0;
-            background: #019879;
-            color: white;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-        .header span {
-            display: block;
-            font-size: 20px;
-            font-weight: normal;
-            margin-top: 5px;
-        }
-    </style>
 </head>
 <body>
     <div class="header">
@@ -29,6 +13,10 @@
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Buscar IP ou Hostname...">
         </div>
+    </div>
+    
+    <div class="summary">
+        <p><strong>Total de hosts:</strong> {{ total_hosts }} | <strong>Hosts Online:</strong> {{ online_hosts }} | <strong>Hosts Offline:</strong> {{ offline_hosts }}</p>
     </div>
     
     <div class="controls">
