@@ -49,3 +49,13 @@ h1 {
     background-color: #d4edda;
     color: #155724;
 }
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+}

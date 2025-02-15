@@ -8,14 +8,33 @@
 </head>
 <body>
     <h1>Resultados do Scan</h1>
+    
+    <div class="controls">
+        <label for="per_page">Exibir:</label>
+        <select id="per_page" onchange="updateFilters()">
+            <option value="10" {% if per_page == 10 %}selected{% endif %}>10</option>
+            <option value="20" {% if per_page == 20 %}selected{% endif %}>20</option>
+            <option value="50" {% if per_page == 50 %}selected{% endif %}>50</option>
+            <option value="100" {% if per_page == 100 %}selected{% endif %}>100</option>
+            <option value="0" {% if per_page == 0 %}selected{% endif %}>Todos</option>
+        </select>
+        
+        <label for="filter_status">Mostrar:</label>
+        <select id="filter_status" onchange="updateFilters()">
+            <option value="both" {% if filter_status == "both" %}selected{% endif %}>Todos</option>
+            <option value="online" {% if filter_status == "online" %}selected{% endif %}>Online</option>
+            <option value="offline" {% if filter_status == "offline" %}selected{% endif %}>Offline</option>
+        </select>
+    </div>
+    
     <table class="styled-table">
         <thead>
             <tr>
-                <th>IP</th>
-                <th>Hostname</th>
-                <th>Status</th>
-                <th>Ping</th>
-                <th>SSH</th>
+                <th><a href="?sort_by=ip&sort_order={% if sort_by == 'ip' and sort_order == 'asc' %}desc{% else %}asc{% endif %}">IP</a></th>
+                <th><a href="?sort_by=hostname&sort_order={% if sort_by == 'hostname' and sort_order == 'asc' %}desc{% else %}asc{% endif %}">Hostname</a></th>
+                <th><a href="?sort_by=status&sort_order={% if sort_by == 'status' and sort_order == 'asc' %}desc{% else %}asc{% endif %}">Status</a></th>
+                <th><a href="?sort_by=ping&sort_order={% if sort_by == 'ping' and sort_order == 'asc' %}desc{% else %}asc{% endif %}">Ping</a></th>
+                <th><a href="?sort_by=ssh&sort_order={% if sort_by == 'ssh' and sort_order == 'asc' %}desc{% else %}asc{% endif %}">SSH</a></th>
                 <th>Usuário</th>
                 <th>Senha</th>
                 <th>Chave</th>
@@ -36,5 +55,23 @@
             {% endfor %}
         </tbody>
     </table>
+    
+    <div class="pagination">
+        {% if page > 1 %}
+            <a href="?page={{ page-1 }}&per_page={{ per_page }}&sort_by={{ sort_by }}&sort_order={{ sort_order }}&filter_status={{ filter_status }}">&laquo; Anterior</a>
+        {% endif %}
+        Página {{ page }} de {{ total_pages }}
+        {% if page < total_pages %}
+            <a href="?page={{ page+1 }}&per_page={{ per_page }}&sort_by={{ sort_by }}&sort_order={{ sort_order }}&filter_status={{ filter_status }}">Próxima &raquo;</a>
+        {% endif %}
+    </div>
+    
+    <script>
+        function updateFilters() {
+            var perPage = document.getElementById("per_page").value;
+            var filterStatus = document.getElementById("filter_status").value;
+            window.location.href = "?per_page=" + perPage + "&filter_status=" + filterStatus + "&sort_by={{ sort_by }}&sort_order={{ sort_order }}";
+        }
+    </script>
 </body>
 </html>
