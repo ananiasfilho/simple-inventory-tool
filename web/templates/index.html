@@ -5,9 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados do Scan</title>
     <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .header {
+            font-size: 40px;
+            text-align: center;
+            padding: 20px 0;
+            background: #019879;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        .header span {
+            display: block;
+            font-size: 20px;
+            font-weight: normal;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Resultados do Scan</h1>
+    <div class="header">
+        Tuba
+        <span>Simple Monitoring Tool</span>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar IP ou Hostname...">
+        </div>
+    </div>
     
     <div class="controls">
         <label for="per_page">Exibir:</label>
@@ -30,11 +52,11 @@
     <table class="styled-table">
         <thead>
             <tr>
-                <th><a href="?sort_by=ip&sort_order={% if sort_by == 'ip' and sort_order == 'asc' %}desc{% else %}asc{% endif %}">IP</a></th>
-                <th><a href="?sort_by=hostname&sort_order={% if sort_by == 'hostname' and sort_order == 'asc' %}desc{% else %}asc{% endif %}">Hostname</a></th>
-                <th><a href="?sort_by=status&sort_order={% if sort_by == 'status' and sort_order == 'asc' %}desc{% else %}asc{% endif %}">Status</a></th>
-                <th><a href="?sort_by=ping&sort_order={% if sort_by == 'ping' and sort_order == 'asc' %}desc{% else %}asc{% endif %}">Ping</a></th>
-                <th><a href="?sort_by=ssh&sort_order={% if sort_by == 'ssh' and sort_order == 'asc' %}desc{% else %}asc{% endif %}">SSH</a></th>
+                <th>IP</th>
+                <th>Hostname</th>
+                <th>Status</th>
+                <th>Ping</th>
+                <th>SSH</th>
                 <th>Usuário</th>
                 <th>Senha</th>
                 <th>Chave</th>
@@ -72,6 +94,22 @@
             var filterStatus = document.getElementById("filter_status").value;
             window.location.href = "?per_page=" + perPage + "&filter_status=" + filterStatus + "&sort_by={{ sort_by }}&sort_order={{ sort_order }}";
         }
+
+        document.getElementById("searchInput").addEventListener("keyup", function() {
+            var input = this.value.toLowerCase();
+            var rows = document.querySelectorAll(".styled-table tbody tr");
+            
+            rows.forEach(row => {
+                var ip = row.cells[0].textContent.toLowerCase();
+                var hostname = row.cells[1].textContent.toLowerCase();
+                
+                if (ip.includes(input) || hostname.includes(input)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        });
     </script>
 </body>
 </html>

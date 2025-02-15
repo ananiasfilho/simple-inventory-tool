@@ -1,12 +1,40 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    margin: 20px;
+    margin: 0;
     text-align: center;
 }
 
-h1 {
-    color: #333;
+.header {
+    background-color: #019879;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+}
+
+.header span {
+    display: block;
+    font-size: 16px;
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+.search-container {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+#searchInput {
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
 }
 
 .styled-table {
@@ -59,3 +87,22 @@ a:hover {
     font-weight: bold;
     text-decoration: underline;
 }
+
+<script>
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+        var input = this.value.toLowerCase();
+        var rows = document.querySelectorAll(".styled-table tbody tr");
+        
+        rows.forEach(row => {
+            var ip = row.cells[0].textContent.toLowerCase();
+            var hostname = row.cells[1].textContent.toLowerCase();
+            
+            if (ip.includes(input) || hostname.includes(input)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+</script>
+
